@@ -31,11 +31,19 @@ namespace rpc.Controllers
         }
 
         // update return type to show list of characters
-        [HttpGet]
+        [HttpGet("GetAll")]
         public ActionResult<List<Character>> Get()
         {
             // can also implement BadRequest or NotFound
             return Ok(characters);
+        }
+
+        // return single character
+        [HttpGet("GetSingle")]
+        public ActionResult<Character> GetSingle()
+        {
+            // can also implement BadRequest or NotFound
+            return Ok(characters[0]);
         }
 
         [NonAction]
