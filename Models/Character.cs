@@ -9,8 +9,10 @@ namespace rpc.Models
 
     public class Character
     {
-    public int Id { get; set; };
+    public int Id { get; set; } = 1;
     public string Name { get; set; } = "Frodo";
+
+    public string EMail{ get; set; } = "";
 
     public int Strength { get; set; } = 10;
 
@@ -20,7 +22,7 @@ namespace rpc.Models
 
     public int Intelligence { get; set; } = 10;
 
-    public RpgClass Class { get; set; } = RpgClass.Knight;
+    public RpgClass Class { get; set; } = RpgClass.Knight; // this will be and admin or user for generic usage
 
     }
 }
