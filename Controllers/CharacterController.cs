@@ -22,7 +22,7 @@ namespace rpc.Controllers
         private static List<Character> characters = new List<Character>
         {
             new Character(),
-            new Character { Id = 2, Name = "Sam" }
+            new Character { Id = 1, Name = "Sam" }
         };
 
         public CharacterController(ILogger<CharacterController> logger)
@@ -39,11 +39,11 @@ namespace rpc.Controllers
         }
 
         // return single character
-        [HttpGet("GetSingle")]
-        public ActionResult<Character> GetSingle()
+        [HttpGet("{id}")]
+        public ActionResult<Character> GetSingle(int id)
         {
             // can also implement BadRequest or NotFound
-            return Ok(characters[0]);
+            return Ok(characters.FirstOrDefault(c => c.Id == id));
         }
 
         [NonAction]
