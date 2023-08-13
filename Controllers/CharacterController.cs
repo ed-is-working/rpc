@@ -30,6 +30,8 @@ namespace rpc.Controllers
             _logger = logger;
         }
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
         // update return type to show list of characters
         [HttpGet("GetAll")]
         public ActionResult<List<Character>> Get()
@@ -46,13 +48,21 @@ namespace rpc.Controllers
             return Ok(characters.FirstOrDefault(c => c.Id == id));
         }
 
+        // add character (C in CRUD)
+        [HttpPost]
+        public ActionResult<List<Character>> AddCharacter(Character newCharacter)
+        {
+            // TODO: add validation, ensure that a character with the same name / Id does not already exist
+            characters.Add(newCharacter);
+            return Ok(characters);
+        }
+
         [NonAction]
         public IActionResult Index()
         {
             return View();
         }
 
-       [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Error()
