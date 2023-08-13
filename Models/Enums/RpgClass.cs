@@ -1,5 +1,9 @@
+using System.Text.Json.Serialization;
+
 namespace rpc.Models.Enums
 {
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum RpgClass
     {
        Knight = 1,
