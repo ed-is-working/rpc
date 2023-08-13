@@ -27,18 +27,22 @@ namespace rpc.Controllers
         }
 
         // create test response
+        [HttpGet]
         public IActionResult Get()
         {
             // can also implement BadRequest or NotFound
             return Ok(knight);
         }
 
+        [NonAction]
         public IActionResult Index()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+       // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+
+       [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Error()
         {
             return View("Error!");
