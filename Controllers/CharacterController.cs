@@ -18,20 +18,24 @@ namespace rpc.Controllers
 
         private readonly ILogger<CharacterController> _logger;
 
-        // create test character
-        private static Character knight = new Character();
+        // enable list of characters
+        private static List<Character> characters = new List<Character>
+        {
+            new Character(),
+            new Character { Id = 2, Name = "Sam" }
+        };
 
         public CharacterController(ILogger<CharacterController> logger)
         {
             _logger = logger;
         }
 
-        // create test response
+        // update return type to show list of characters
         [HttpGet]
-        public ActionResult<Character> Get()
+        public ActionResult<List<Character>> Get()
         {
             // can also implement BadRequest or NotFound
-            return Ok(knight);
+            return Ok(characters);
         }
 
         [NonAction]
