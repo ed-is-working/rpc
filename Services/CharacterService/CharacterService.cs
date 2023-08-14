@@ -30,8 +30,10 @@ namespace rpc.Services.CharacterService
 
         public Character GetCharacterById(int id)
         {
+            var character = characters.FirstOrDefault(c => c.Id == id);
+
             // can also implement BadRequest or NotFound
-            return characters.FirstOrDefault(c => c.Id == id);
+            return (character is not null) ? character : throw new Exception("Character not found");
         }
 
     }
