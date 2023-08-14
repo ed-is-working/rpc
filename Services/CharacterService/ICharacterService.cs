@@ -16,5 +16,8 @@ namespace rpc.Services.CharacterService
 
         // add update character method to enforce update functionality
         Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO newCharacter);
+
+        // add delete character method to enforce delete functionality
+        Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id);
     }
 }
