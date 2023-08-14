@@ -20,25 +20,35 @@ namespace rpc.Data
 
         public async Task<ServiceResponse<int>> Register(User user, string password)
         {
+            var response = new ServiceResponse<int>();
+            // check if the user exists
+            if(await UserExists(user.Username))
+            {
+                response.Success = false;
+                response.Message = "User already exists.";
+                return response;
+            }
+
             // create the password hash and salt
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
             // set the password hash and salt
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
-            
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            var response = new ServiceResponse<int>
-            {
-                Data = user.Id
-            };
+            response.Data = user.Id;
             return response;
         
         }
 
-        public Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string username)
         {
-            throw new NotImplementedException();
+            if(await _context.Users.AnyAsync(x => x.Username.ToLower().Equals(username.ToLower())))
+            {
+                return true;
+            }
+            return false;
         }
 
         // method to hash the password
