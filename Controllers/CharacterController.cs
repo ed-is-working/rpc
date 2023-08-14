@@ -48,13 +48,24 @@ namespace rpc.Controllers
             return Ok(await _characterService.GetCharacterById(id));
         }
 
-        // add character (C in CRUD)
+        // add character (C in Crud)
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> AddCharacter(AddCharacterDTO newCharacter)
         {
             // TODO: add validation, ensure that a character with the same name / Id does not already exist
             return Ok(await _characterService.AddCharacter(newCharacter));
         }
+
+
+        // Put character (U in crUd)
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+        {
+            // TODO: add validation, ensure that a character with the same name / Id does not already exist
+            return Ok(await _characterService.UpdateCharacter(updatedCharacter));
+        }
+
 
         [NonAction]
         public IActionResult Index()
