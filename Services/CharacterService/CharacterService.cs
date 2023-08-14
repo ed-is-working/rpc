@@ -107,7 +107,7 @@ namespace rpc.Services.CharacterService
 
         }
 
-        public Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id)
+        public async Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
             try
@@ -125,6 +125,11 @@ namespace rpc.Services.CharacterService
                 serviceResponse.Success = false;
                 serviceResponse.Message = ex.Message;
             }
+
+
+            // Task.FromResult() is a helper method that returns a Task object 
+            // that is already completed (this would be used in sycnrhonoous code)
+            // return Task.FromResult(serviceResponse);
 
             return serviceResponse;
 
