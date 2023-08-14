@@ -14,7 +14,7 @@ namespace rpc.Services.CharacterService
         private static List<Character> characters = new List<Character>
         {
             new Character(),
-            new Character { Id = 1, Name = "Sam" }
+            new Character { Id = 2, Name = "Sam" }
         };
         private readonly IMapper _mapper;
 
@@ -37,6 +37,7 @@ namespace rpc.Services.CharacterService
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
             serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
+            
             return serviceResponse;
         }
 
@@ -47,19 +48,49 @@ namespace rpc.Services.CharacterService
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
             serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
-              // can also implement BadRequest or NotFound
+
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id)
         {
-            // can also implement BadRequest or NotFound
             // null check is now removed since data is nullable, will return null
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             // set character to the character with the matching id
             var character = characters.FirstOrDefault(c => c.Id == id); 
             serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);  // set the data property to the list of characters 
+            
             return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
+        {
+            // update all the properties with new values
+            var serviceResponse = new ServiceResponse<GetCharacterDTO>();
+            // set character to the character with the matching id
+            var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id); 
+            try
+            {
+
+                // update the character with the new values
+                character.Name = updatedCharacter.Name;
+                character.EMail = updatedCharacter.EMail;
+                character.Class = updatedCharacter.Class;
+                character.Defense = updatedCharacter.Defense;
+                character.HitPoints = updatedCharacter.HitPoints;
+                character.Intelligence = updatedCharacter.Intelligence;
+                character.Strength = updatedCharacter.Strength;
+                serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
+
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+           
         }
 
     }
