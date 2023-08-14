@@ -9,6 +9,8 @@ functionality using JSONWeb Tokens
 * Added initial Character / User Model + Enum, Character / User Class
 * Added API calls to get list of Characters / Users, and get single Character / User (R in CRUD)
 * Added remaining method calls to the service for Create (Insert), Update and Delete operations (CUD in CRUD)
+* Added Core Entity Framework, Core Entity Framework Design, Core Entity Framework - MS SQL Server Support
+* Added MS SQL (Mac, Docker) and Azure Data Studio (instead of SQL Server Management Studio)
 
 
 ## Requirements
