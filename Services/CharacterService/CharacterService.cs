@@ -126,9 +126,9 @@ namespace rpc.Services.CharacterService
                 serviceResponse.Message = ex.Message;
             }
 
-            // return serviceResponse;
+            return serviceResponse;
 
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
     }
