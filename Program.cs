@@ -2,6 +2,7 @@
 global using rpc.Models;
 global using rpc.Services.CharacterService;
 global using rpc.DTOs.Character;
+global using AutoMapper; // It is used in the CharacterService.cs and will be used elsewhere
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Add AutoMapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 // Add the CharacterService to the container
 // add a scoped service for every request
 builder.Services.AddScoped<ICharacterService, CharacterService>();
