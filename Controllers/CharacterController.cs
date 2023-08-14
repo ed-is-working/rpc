@@ -34,7 +34,7 @@ namespace rpc.Controllers
 
         // update return type to show list of characters
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<Character>>> Get()
+        public async Task<ActionResult<ServiceResponse<List<Character>>>> Get()
         {
             // can also implement BadRequest or NotFound
             return Ok(await _characterService.GetAllCharacters());
@@ -42,7 +42,7 @@ namespace rpc.Controllers
 
         // return single character
         [HttpGet("{id}")]
-        public async Task<ActionResult<Character>> GetSingle(int id)
+        public async Task<ActionResult<ServiceResponse<Character>>> GetSingle(int id)
         {
             // can also implement BadRequest or NotFound
             return Ok(await _characterService.GetCharacterById(id));
@@ -50,7 +50,7 @@ namespace rpc.Controllers
 
         // add character (C in CRUD)
         [HttpPost]
-        public async Task<ActionResult<List<Character>>> AddCharacter(Character newCharacter)
+        public async Task<ActionResult<ServiceResponse<List<Character>>>> AddCharacter(Character newCharacter)
         {
             // TODO: add validation, ensure that a character with the same name / Id does not already exist
             return Ok(await _characterService.AddCharacter(newCharacter));
