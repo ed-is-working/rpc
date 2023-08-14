@@ -67,10 +67,19 @@ namespace rpc.Services.CharacterService
         {
             // update all the properties with new values
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
-            // set character to the character with the matching id
-            var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id); 
+
             try
             {
+                // set character to the character with the matching id
+                var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id); 
+                if(character == null)
+                {
+                    //serviceResponse.Success = false;
+                    //serviceResponse.Message = "Character not found.";
+                    //return serviceResponse; // or throw an exception
+
+                  throw new Exception($"Character with id {updatedCharacter.Id} not found.");
+                }
 
                 // update the character with the new values
                 character.Name = updatedCharacter.Name;
