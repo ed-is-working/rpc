@@ -18,12 +18,14 @@ namespace rpc.Services.CharacterService
             new Character { Id = 2, Name = "Sam" }
         };
         private readonly IMapper _mapper;
+        public DataContext _Context { get; }
 
-        public CharacterService(IMapper mapper)
+        public CharacterService(IMapper mapper, DataContext context)
         {
+            _Context = context;
             _mapper = mapper;
         }
-        /* TODO: when DB is implemented, update this to use DB with await calls */
+
         public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
         {
             // add serviceResponse to every method and set the data property accordingly
@@ -44,11 +46,13 @@ namespace rpc.Services.CharacterService
 
         public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
         {
-            // add serviceResponse to every method and set the data property accordingly
+            // TODO: refactor out to a method
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
+            var dbCharacters = await _Context.Characters.ToListAsync();
+
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
-            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
+            serviceResponse.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
 
             return serviceResponse;
         }
@@ -58,8 +62,8 @@ namespace rpc.Services.CharacterService
             // null check is now removed since data is nullable, will return null
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             // set character to the character with the matching id
-            var character = characters.FirstOrDefault(c => c.Id == id);
-            serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);  // set the data property to the list of characters 
+            var dbCharacter = await _Context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+            serviceResponse.Data = _mapper.Map<GetCharacterDTO>(dbCharacter);  // set the data property to the list of characters 
 
             return serviceResponse;
         }
