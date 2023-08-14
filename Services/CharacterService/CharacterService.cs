@@ -11,12 +11,7 @@ namespace rpc.Services.CharacterService
 {
     public class CharacterService : ICharacterService
     {
-        // enable list of characters
-        private static List<Character> characters = new List<Character>
-        {
-            new Character(),
-            new Character { Id = 2, Name = "Sam" }
-        };
+
         private readonly IMapper _mapper;
         public DataContext _Context { get; }
 
