@@ -12,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Add the CharacterService to the container
+// add a scoped service for every request
 builder.Services.AddScoped<ICharacterService, CharacterService>();
 
 var app = builder.Build();
