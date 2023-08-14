@@ -14,6 +14,8 @@ namespace rpc
         {
             CreateMap<Character, GetCharacterDTO>();
             CreateMap<AddCharacterDTO, Character>();
+            // uncomment if using _mapper.Map(updatedCharacter, character) in UpdateCharacter method of CharacterService
+            // CreateMap<UpdateCharacterDTO, Character>();
         }
     }
 }

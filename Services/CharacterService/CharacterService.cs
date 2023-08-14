@@ -81,6 +81,10 @@ namespace rpc.Services.CharacterService
                   throw new Exception($"Character with id {updatedCharacter.Id} not found.");
                 }
 
+                // options: use automapper to map the updatedCharacter to the character
+                // _mapper.Map<Character>(updatedCharacter); // or
+                // _mapper.Map(updatedCharacter, character); // but would have to update AutoMapperProfile.cs
+
                 // update the character with the new values
                 character.Name = updatedCharacter.Name;
                 character.EMail = updatedCharacter.EMail;
