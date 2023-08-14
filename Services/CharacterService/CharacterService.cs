@@ -14,7 +14,7 @@ namespace rpc.Services.CharacterService
             new Character(),
             new Character { Id = 1, Name = "Sam" }
         };
-        public List<Character> AddCharacter(Character newCharacter)
+        public async Task<List<Character>> AddCharacter(Character newCharacter)
         {
 
             // TODO: add validation, ensure that a character with the same name / Id does not already exist
@@ -22,13 +22,13 @@ namespace rpc.Services.CharacterService
             return characters;
         }
 
-        public List<Character> GetAllCharacters()
+        public async Task<List<Character>> GetAllCharacters()
         {
             // can also implement BadRequest or NotFound
             return characters;
         }
 
-        public Character GetCharacterById(int id)
+        public async Task<Character> GetCharacterById(int id)
         {
             var character = characters.FirstOrDefault(c => c.Id == id);
 
