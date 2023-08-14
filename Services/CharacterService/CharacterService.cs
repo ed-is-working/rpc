@@ -122,13 +122,17 @@ namespace rpc.Services.CharacterService
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
             try
             {
-                var character = characters.First(c => c.Id == id);
+                var character = await _Context.Characters.FirstOrDefaultAsync(c => c.Id == id);
                 if (character is null)
                 {
                     throw new Exception($"Character with Id '{id}' not found");
                 }
-                characters.Remove(character);
-                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+                _Context.Characters.Remove(character);
+
+                await _Context.SaveChangesAsync();
+                
+                serviceResponse.Data = 
+                    await _Context.Characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToListAsync();
             }
             catch (Exception ex)
             {
