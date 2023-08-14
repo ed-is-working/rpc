@@ -13,5 +13,8 @@ namespace rpc.Services.CharacterService
         Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters();
         Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id);
         Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter);
+
+        // add update character method to enforce update functionality
+        Task<ServiceResponse<GetCharacterDTO>> UpdateCharacter(UpdateCharacterDTO newCharacter);
     }
 }
