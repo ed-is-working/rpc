@@ -3,6 +3,7 @@ global using rpc.Models;
 global using rpc.Services.CharacterService;
 global using rpc.DTOs.Character;
 global using AutoMapper; // It is used in the CharacterService.cs and will be used elsewhere
+global using Microsoft.EntityFrameworkCore; // It is used in the DataContext.cs and will be used elsewhere
 
 
 var builder = WebApplication.CreateBuilder(args);
