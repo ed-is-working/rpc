@@ -14,6 +14,8 @@ namespace rpc.Services.CharacterService
             new Character(),
             new Character { Id = 1, Name = "Sam" }
         };
+
+        /* TODO: when DB is implemented, update this to use DB with await calls */
         public async Task<List<Character>> AddCharacter(Character newCharacter)
         {
 
