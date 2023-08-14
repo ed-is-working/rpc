@@ -15,11 +15,6 @@ functionality using JSONWeb Tokens
 * Added correct(!) connection string for MS SQL in Docker for Mac (TODO: add for windows)
 * Added Data Context to map models to MS SQL Tables; setup migrations
   
-
-
 ## Requirements
 
-
 ## Setup
-
-
