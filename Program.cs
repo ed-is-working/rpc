@@ -4,11 +4,13 @@ global using rpc.Services.CharacterService;
 global using rpc.DTOs.Character;
 global using AutoMapper; // It is used in the CharacterService.cs and will be used elsewhere
 global using Microsoft.EntityFrameworkCore; // It is used in the DataContext.cs and will be used elsewhere
-
+global using rpc.Data; // It is used in the DataContext.cs and will be used elsewhere
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));    
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
