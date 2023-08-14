@@ -1,3 +1,4 @@
+global using AutoMapper;
 
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace rpc.Services.CharacterService
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
             serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
-            
+
             return serviceResponse;
         }
 
@@ -57,9 +58,9 @@ namespace rpc.Services.CharacterService
             // null check is now removed since data is nullable, will return null
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             // set character to the character with the matching id
-            var character = characters.FirstOrDefault(c => c.Id == id); 
+            var character = characters.FirstOrDefault(c => c.Id == id);
             serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);  // set the data property to the list of characters 
-            
+
             return serviceResponse;
         }
 
@@ -71,14 +72,14 @@ namespace rpc.Services.CharacterService
             try
             {
                 // set character to the character with the matching id
-                var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id); 
-                if(character == null)
+                var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+                if (character is null)
                 {
                     //serviceResponse.Success = false;
                     //serviceResponse.Message = "Character not found.";
                     //return serviceResponse; // or throw an exception
 
-                  throw new Exception($"Character with id {updatedCharacter.Id} not found.");
+                    throw new Exception($"Character with id {updatedCharacter.Id} not found.");
                 }
 
                 // options: use automapper to map the updatedCharacter to the character
@@ -103,7 +104,31 @@ namespace rpc.Services.CharacterService
             }
 
             return serviceResponse;
-           
+
+        }
+
+        public Task<ServiceResponse<List<GetCharacterDTO>>> DeleteCharacter(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
+            try
+            {
+                var character = characters.First(c => c.Id == id);
+                if (character is null)
+                {
+                    throw new Exception($"Character with Id '{id}' not found");
+                }
+                characters.Remove(character);
+                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            // return serviceResponse;
+
+            throw new NotImplementedException();
         }
 
     }
