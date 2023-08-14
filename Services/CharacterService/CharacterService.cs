@@ -28,19 +28,27 @@ namespace rpc.Services.CharacterService
 
         public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
         {
+            
             // add serviceResponse to every method and set the data property accordingly
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
             // create a new character
             var character = _mapper.Map<Character>(newCharacter);
-            // set the Id to the next available Id
-            character.Id = characters.Max(c => c.Id) + 1;
 
             // TODO: add validation, ensure that a character with the same name / Id does not already exist
-            characters.Add(character);
+            _Context.Characters.Add(character); // no need to use AddAsync() while in the edit state
+           
+           _Context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Characters ON"); // enable IDENTITY_INSERT
+            
+            // save changes to the database and generates ID
+            await _Context.SaveChangesAsync();
+
+            _Context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Characters OFF"); // disable IDENTITY_INSERT
+            
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
-            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
-
+            serviceResponse.Data = 
+                await _Context.Characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToListAsync();  
+                
             return serviceResponse;
         }
 
