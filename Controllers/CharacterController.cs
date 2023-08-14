@@ -62,8 +62,12 @@ namespace rpc.Controllers
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> UpdateCharacter(UpdateCharacterDTO updatedCharacter)
         {
-            // TODO: add validation, ensure that a character with the same name / Id does not already exist
-            return Ok(await _characterService.UpdateCharacter(updatedCharacter));
+            var response = await _characterService.UpdateCharacter(updatedCharacter);
+            if(response.Data is null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
 
