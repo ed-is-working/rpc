@@ -1,6 +1,7 @@
 // global availability
 global using rpc.Models;
 global using rpc.Services.CharacterService;
+global using rpc.DTOs.Character;
 
 
 var builder = WebApplication.CreateBuilder(args);
