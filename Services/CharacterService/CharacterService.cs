@@ -84,7 +84,8 @@ namespace rpc.Services.CharacterService
             try
             {
                 // set character to the character with the matching id
-                var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+                var character = 
+                    await _Context.Characters.FirstOrDefaultAsync(c => c.Id == updatedCharacter.Id);
                 if (character is null)
                 {
                     //serviceResponse.Success = false;
@@ -106,6 +107,8 @@ namespace rpc.Services.CharacterService
                 character.HitPoints = updatedCharacter.HitPoints;
                 character.Intelligence = updatedCharacter.Intelligence;
                 character.Strength = updatedCharacter.Strength;
+
+                await _Context.SaveChangesAsync();
                 serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
 
             }

@@ -9,7 +9,7 @@ namespace rpc.Models
 
     public class Character
     {
-    public int Id { get; set; } = 1;
+    public int Id { get; set; }
     public string Name { get; set; } = "Frodo";
 
     public string EMail{ get; set; } = "";
