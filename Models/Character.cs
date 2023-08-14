@@ -23,6 +23,7 @@ namespace rpc.Models
     public int Intelligence { get; set; } = 10;
 
     public RpgClass Class { get; set; } = RpgClass.Knight; // this will be and admin or user for generic usage
+    public User? User { get; set; } // this is the foreign key to the user table
 
     }
 }
