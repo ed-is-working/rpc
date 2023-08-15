@@ -33,6 +33,7 @@ namespace rpc.Controllers
 
        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 
+        // [AllowAnonymous] // in case we want to open methods up anonymously
         // update return type to show list of characters
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> Get()
