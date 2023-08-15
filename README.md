@@ -14,10 +14,13 @@ functionality using JSONWeb Tokens
 * Added MS SQL (Mac, Docker) and Azure Data Studio (instead of SQL Server Management Studio)
 * Added correct(!) connection string for MS SQL in Docker for Mac (TODO: add for windows)
 * Added Data Context to map models to MS SQL Tables; setup migrations
+* Added Login Functionality
+* Added JSON Web Tokens for secure auth
   
 ## Requirements
 
 ## Setup* Added MS SQL (Mac, Docker) and Azure Data Studio (instead of SQL Server Management Studio)
+
 * Added correct(!) connection string for MS SQL in Docker for Mac (TODO: add for windows)
 * Added Data Context to map models to MS SQL Tables; setup migrations
   
