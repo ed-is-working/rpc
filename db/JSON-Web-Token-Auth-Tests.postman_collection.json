@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "8a127d8e-a52d-4bac-986f-979611190ad4",
+		"name": "JSON Web Token Auth Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "993272"
+	},
+	"item": [
+		{
+			"name": "00-Register-User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"Neil\",\n  \"password\": \"armstrong\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5015/Auth/Register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"Auth",
+						"Register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "01-login",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"JohnDoe\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5015/Auth/Login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"Auth",
+						"Login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02-Get-All-Characters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5015/api/Character/GetAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"api",
+						"Character",
+						"GetAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "03-Get-Character-By-Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5015/api/Character/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"api",
+						"Character",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04-Add-Character",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Starbuck\",\n  \"eMail\": \"starbuck@galactica.com\",\n  \"strength\": 12,\n  \"defense\": 13,\n  \"hitPoints\": 15,\n  \"intelligence\": 16,\n  \"class\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5015/api/Character",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"api",
+						"Character"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05-Put-(Update)-Character",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 9,\n  \"name\": \"update02\",\n  \"eMail\": \"update2@update.com\",\n  \"strength\": 15,\n  \"defense\": 15,\n  \"hitPoints\": 15,\n  \"intelligence\": 15,\n  \"class\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5015/api/Character",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"api",
+						"Character"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "06-Delete-Character",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 9,\n  \"name\": \"update02\",\n  \"eMail\": \"update2@update.com\",\n  \"strength\": 15,\n  \"defense\": 15,\n  \"hitPoints\": 15,\n  \"intelligence\": 15,\n  \"class\": \"User\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5015/api/Character",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5015",
+					"path": [
+						"api",
+						"Character"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiJKb2huRG9lIiwibmJmIjoxNjkyMTMwODM0LCJleHAiOjE2OTIyMTcyMzQsImlhdCI6MTY5MjEzMDgzNH0.Io6qgYviCp-wHPDHCnk-hXhkJ2TF5pZb5PT8qY-6Ho1mpxjlVr-ILyDdx-4RevjRLqjwN-4aKqYBZuo3_sy0Tg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
