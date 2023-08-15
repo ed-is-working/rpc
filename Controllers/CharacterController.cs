@@ -8,16 +8,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 
 namespace rpc.Controllers
 {
-        [ApiController]
-        [Route("api/[controller]")]
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
 
-    // TODO: is it better to use ControllerBase or Controller?
     public class CharacterController : Controller
     {
 
