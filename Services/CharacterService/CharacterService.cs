@@ -47,11 +47,11 @@ namespace rpc.Services.CharacterService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
+        public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters(int userId)
         {
-            // TODO: refactor out to a method
+
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
-            var dbCharacters = await _Context.Characters.ToListAsync();
+            var dbCharacters = await _Context.Characters.Where(c => c.User!.Id == userId).ToListAsync();
 
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop

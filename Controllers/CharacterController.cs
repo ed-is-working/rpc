@@ -38,15 +38,17 @@ namespace rpc.Controllers
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCharacterDTO>>>> Get()
         {
-            // can also implement BadRequest or NotFound
-            return Ok(await _characterService.GetAllCharacters());
+            // retrieve user id to be used in the service
+            int id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)!.Value);
+            
+            return Ok(await _characterService.GetAllCharacters(userId: id));
         }
 
         // return single character
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<GetCharacterDTO>>> GetSingle(int id)
         {
-            // can also implement BadRequest or NotFound
+            
             return Ok(await _characterService.GetCharacterById(id));
         }
 

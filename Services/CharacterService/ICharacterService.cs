@@ -10,7 +10,8 @@ namespace rpc.Services.CharacterService
     public interface ICharacterService
     {
         // refactored to use ServiceResponse, which is a generic class
-        Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters();
+        // GetAllCharacters checks the userId of logged In user to retrieve appropriate data
+        Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters(int userId);
         Task<ServiceResponse<GetCharacterDTO>> GetCharacterById(int id);
         Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter);
 
