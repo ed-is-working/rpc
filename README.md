@@ -17,6 +17,7 @@ functionality using JSONWeb Tokens
 * Added Login Functionality
 * Added JSON Web Tokens for secure auth
 * Added secured method testing for Swagger
+* Added basic ID filter with JSON Auth to get claimed data
 
 
 ## TODOs
