@@ -16,14 +16,23 @@ functionality using JSONWeb Tokens
 * Added Data Context to map models to MS SQL Tables; setup migrations
 * Added Login Functionality
 * Added JSON Web Tokens for secure auth
+* Added secured method testing for Swagger
+
+
+## TODOs
+
+* map out implementation for testing with Insomnia or Postman
+* create a simple webpage with fetch() methods to test login/logout
+* update documentation
+* code cleanup
+* repo cleanup 
   
 ## Requirements
 
-## Setup* Added MS SQL (Mac, Docker) and Azure Data Studio (instead of SQL Server Management Studio)
-
-* Added correct(!) connection string for MS SQL in Docker for Mac (TODO: add for windows)
-* Added Data Context to map models to MS SQL Tables; setup migrations
-  
-## Requirements
+* ASP.NET 7.x
+* MS SQL Server Express or Developer Edition (currently using 2022)
+* (Windows Only) SQL Server Management Studio
+* (Mac Only) Docker Container to setup MS SQL Server
+* (Mac Only) Azure Data Studio
 
 ## Setup
