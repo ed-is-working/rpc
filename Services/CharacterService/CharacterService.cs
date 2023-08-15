@@ -11,44 +11,51 @@ namespace rpc.Services.CharacterService
 {
     public class CharacterService : ICharacterService
     {
-        // enable list of characters
-        private static List<Character> characters = new List<Character>
-        {
-            new Character(),
-            new Character { Id = 2, Name = "Sam" }
-        };
-        private readonly IMapper _mapper;
 
-        public CharacterService(IMapper mapper)
+        private readonly IMapper _mapper;
+        public DataContext _Context { get; }
+
+        public CharacterService(IMapper mapper, DataContext context)
         {
+            _Context = context;
             _mapper = mapper;
         }
-        /* TODO: when DB is implemented, update this to use DB with await calls */
+
         public async Task<ServiceResponse<List<GetCharacterDTO>>> AddCharacter(AddCharacterDTO newCharacter)
         {
+            
             // add serviceResponse to every method and set the data property accordingly
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
             // create a new character
             var character = _mapper.Map<Character>(newCharacter);
-            // set the Id to the next available Id
-            character.Id = characters.Max(c => c.Id) + 1;
 
             // TODO: add validation, ensure that a character with the same name / Id does not already exist
-            characters.Add(character);
+            _Context.Characters.Add(character); // no need to use AddAsync() while in the edit state
+           
+           _Context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Characters ON"); // enable IDENTITY_INSERT
+            
+            // save changes to the database and generates ID
+            await _Context.SaveChangesAsync();
+
+            _Context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Characters OFF"); // disable IDENTITY_INSERT
+            
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
-            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
-
+            serviceResponse.Data = 
+                await _Context.Characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToListAsync();  
+                
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<List<GetCharacterDTO>>> GetAllCharacters()
         {
-            // add serviceResponse to every method and set the data property accordingly
+            // TODO: refactor out to a method
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
+            var dbCharacters = await _Context.Characters.ToListAsync();
+
             // use the Select() method to map each character to a GetCharacterDTO
             // then convert it to a List.  This is a LINQ method that is similar to a foreach loop
-            serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
+            serviceResponse.Data = dbCharacters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();  // set the data property to the list of characters
 
             return serviceResponse;
         }
@@ -58,8 +65,8 @@ namespace rpc.Services.CharacterService
             // null check is now removed since data is nullable, will return null
             var serviceResponse = new ServiceResponse<GetCharacterDTO>();
             // set character to the character with the matching id
-            var character = characters.FirstOrDefault(c => c.Id == id);
-            serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);  // set the data property to the list of characters 
+            var dbCharacter = await _Context.Characters.FirstOrDefaultAsync(c => c.Id == id);
+            serviceResponse.Data = _mapper.Map<GetCharacterDTO>(dbCharacter);  // set the data property to the list of characters 
 
             return serviceResponse;
         }
@@ -72,7 +79,8 @@ namespace rpc.Services.CharacterService
             try
             {
                 // set character to the character with the matching id
-                var character = characters.FirstOrDefault(c => c.Id == updatedCharacter.Id);
+                var character = 
+                    await _Context.Characters.FirstOrDefaultAsync(c => c.Id == updatedCharacter.Id);
                 if (character is null)
                 {
                     //serviceResponse.Success = false;
@@ -94,6 +102,8 @@ namespace rpc.Services.CharacterService
                 character.HitPoints = updatedCharacter.HitPoints;
                 character.Intelligence = updatedCharacter.Intelligence;
                 character.Strength = updatedCharacter.Strength;
+
+                await _Context.SaveChangesAsync();
                 serviceResponse.Data = _mapper.Map<GetCharacterDTO>(character);
 
             }
@@ -112,13 +122,17 @@ namespace rpc.Services.CharacterService
             var serviceResponse = new ServiceResponse<List<GetCharacterDTO>>();
             try
             {
-                var character = characters.First(c => c.Id == id);
+                var character = await _Context.Characters.FirstOrDefaultAsync(c => c.Id == id);
                 if (character is null)
                 {
                     throw new Exception($"Character with Id '{id}' not found");
                 }
-                characters.Remove(character);
-                serviceResponse.Data = characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToList();
+                _Context.Characters.Remove(character);
+
+                await _Context.SaveChangesAsync();
+                
+                serviceResponse.Data = 
+                    await _Context.Characters.Select(c => _mapper.Map<GetCharacterDTO>(c)).ToListAsync();
             }
             catch (Exception ex)
             {

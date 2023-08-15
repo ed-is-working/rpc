@@ -9,7 +9,7 @@ namespace rpc.DTOs.Character
     // considered to call it GetCharacterResponseDTO.cs
     public class GetCharacterDTO
     {
-    public int Id { get; set; } = 1;
+    public int Id { get; set; }
     public string Name { get; set; } = "Frodo";
 
     public string EMail{ get; set; } = "";

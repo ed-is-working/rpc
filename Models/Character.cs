@@ -9,7 +9,7 @@ namespace rpc.Models
 
     public class Character
     {
-    public int Id { get; set; } = 1;
+    public int Id { get; set; }
     public string Name { get; set; } = "Frodo";
 
     public string EMail{ get; set; } = "";
@@ -23,6 +23,7 @@ namespace rpc.Models
     public int Intelligence { get; set; } = 10;
 
     public RpgClass Class { get; set; } = RpgClass.Knight; // this will be and admin or user for generic usage
+    public User? User { get; set; } // this is the foreign key to the user table
 
     }
 }

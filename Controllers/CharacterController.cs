@@ -88,8 +88,8 @@ namespace rpc.Controllers
             return View();
         }
 
-
-       [ApiExplorerSettings(IgnoreApi = true)]
+        [NonAction]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public IActionResult Error()
         {
             return View("Error!");
