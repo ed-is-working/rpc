@@ -18,15 +18,17 @@ functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entit
 * Added JSON Web Tokens for secure auth
 * Added secured method testing for Swagger
 * Added basic ID filter with JSON Auth to get claimed data
+* Added MS SQl Server backup file to repository
+* Exported Sample Postman Collection to repository
 
 
 ## TODOs
 
-* map out implementation for testing with Insomnia or Postman
+
 * create a simple webpage with fetch() methods to test login/logout
 * update documentation
 * code cleanup
-* repo cleanup 
+* repo cleanup
   
 ## Requirements
 
@@ -36,8 +38,13 @@ functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entit
 * (Mac Only) Docker Container to setup MS SQL Server
 * (Mac Only) Azure Data Studio
 
+## Notes
+
+Each feature that was built-out has its own branch and is functionally complete in each branch.
+You can view the specific commits in the log for each branch to see the changes performed there.
+
 ## Nice-To-Haves
 
 * refactor characters to employees
 * Add CRUD functionality to manage characters
-* Create seeders
+* Create seeders (instead of MS SQL backup)
