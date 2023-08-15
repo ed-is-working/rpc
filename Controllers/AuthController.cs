@@ -40,6 +40,23 @@ namespace rpc.Controllers
             return Ok(response);
         }
 
+        [HttpPost("Login")]
+        public async Task<ActionResult<ServiceResponse<int>>> Login(UserRegisterDTO request)
+        {
+            // this allows flexibility in the request body to be able to 
+            // other info in additon to username and password
+            var response = await _authRepo.Login(
+               request.Username, request.Password
+            );
+
+            // check if the response is successful
+            if(!response.Success)
+            {
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
+
 
         [NonAction]
         [ApiExplorerSettings(IgnoreApi = true)]
