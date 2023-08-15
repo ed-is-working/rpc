@@ -1,9 +1,9 @@
-# Exploring .NET 7, Web APIs, and the Entity Framework
+#  JSON Web Token Authentication Exploration
 
 ## Description
 
 The objective is to create a service that will serve to manage characters / users and add login/logout (auth)
-functionality using JSONWeb Tokens
+functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entity Framework as the backend
 
 ## Updates
 
@@ -36,4 +36,8 @@ functionality using JSONWeb Tokens
 * (Mac Only) Docker Container to setup MS SQL Server
 * (Mac Only) Azure Data Studio
 
-## Setup
+## Nice-To-Haves
+
+* refactor characters to employees
+* Add CRUD functionality to manage characters
+* Create seeders
