@@ -1,7 +1,54 @@
 // check if token is valid
-const validateToken = (token,username) => {
+const validateToken = async (token,username) => {
 
-    return true;
+    if(!token || !username){
+        return false;
+    }
+
+    // we can make an API call with the appropriate header information to check if the token is valid
+    // if it is valid, then we can return true
+    // if it is not valid, then we can return false
+    let isAPICallSuccessful = false;
+    let isTokenValid = false;
+    let fetchResult = false;
+
+    await fetch('http://localhost:5015/api/Character/GetAll', {
+        method: 'GET',
+        headers: {
+            'Accept': '*/*',
+            'Connection': 'keep-alive',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Authorization': 'Bearer ' + token,
+        }
+    }).then(response => {
+        if(response.status == 200){
+            isAPICallSuccessful = true;
+            isTokenValid = true;
+        } else {
+            isAPICallSuccessful = true;
+            isTokenValid = false;
+        }
+        return response.json();
+    }).then(result => {
+        console.log('fetchResult before = ', fetchResult);
+        console.log(isAPICallSuccessful);
+        console.log(isTokenValid);
+        if(isAPICallSuccessful && isTokenValid){
+            fetchResult = true;
+        }
+        console.log('fetchResult after = ', fetchResult);
+        return fetchResult;
+    }).then(fetchResult => {
+        if(fetchResult){
+            showSomeData();
+            return true;
+        } else{
+            return false;
+        }
+    });
+    
+
+
 
 };
 
@@ -19,7 +66,7 @@ const returnUnauthorized = (userSpan, message) => {
 const showSomeData = () => {
 
     // data that is claimed by this user can be shown here (demo)
-
+    console.log("showing some data");
 };
 
 
@@ -61,13 +108,11 @@ window.addEventListener('load', (event) => {
 
 });
 
+// logout
+signOutButton.addEventListener('click', (event) => {
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('username');
+    window.location.href = "../index.html";
+})
 
-/*
-    if(localStorage.getItem('token') != null && localStorage.getItem('user') != null){
-        // user is logged in
-        // hide login form
-        document.getElementById('loginForm').style.display = "none";
-        // show logout form
-        document.getElementById('logoutForm').style.display = "block";
-    }
-*/
+
