@@ -20,12 +20,11 @@ functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entit
 * Added basic ID filter with JSON Auth to get claimed data
 * Added MS SQl Server backup file to repository
 * Exported Sample Postman Collection to repository
+* Created Simple Web Pages to illustrate access to API
 
 
 ## TODOs
 
-
-* create a simple webpage with fetch() methods to test login/logout
 * update documentation
 * code cleanup
 * repo cleanup
