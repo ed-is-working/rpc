@@ -30,17 +30,17 @@ const validateToken = async (token,username) => {
         }
         return response.json();
     }).then(result => {
-        console.log('fetchResult before = ', fetchResult);
-        console.log(isAPICallSuccessful);
-        console.log(isTokenValid);
+        // console.log('fetchResult before = ', fetchResult);
+        // console.log(isAPICallSuccessful);
+        // console.log(isTokenValid);
         if(isAPICallSuccessful && isTokenValid){
             fetchResult = true;
         }
-        console.log('fetchResult after = ', fetchResult);
+        // console.log('fetchResult after = ', fetchResult);
         return fetchResult;
     }).then(fetchResult => {
         if(fetchResult){
-            showSomeData();
+            showSomeData(token);
             return true;
         } else{
             return false;
@@ -63,10 +63,35 @@ const returnUnauthorized = (userSpan, message) => {
 
 };
 
-const showSomeData = () => {
+const showSomeData = async (token) => {
 
     // data that is claimed by this user can be shown here (demo)
-    console.log("showing some data");
+    // console.log("showing some data");
+    await fetch('http://localhost:5015/api/Character/GetAll', {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Accept': '*/*',
+            'Connection': 'keep-alive',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Authorization': 'Bearer ' + token,
+        }
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+
+        console.log(result);
+        let data = result.data;
+        let dataDiv = document.getElementById('dataDiv');
+        dataDiv.innerHTML = "";
+        for(let i = 0; i < data.length; i++){
+            let dataItem = document.createElement('p');
+            dataItem.innerHTML = data[i].id + ". " +data[i].name + " " + data[i].eMail;
+            dataDiv.appendChild(dataItem);
+        }
+
+    });
+    
 };
 
 
@@ -103,8 +128,8 @@ window.addEventListener('load', (event) => {
 
 
     // check if local storage has value for token
-    console.log(token); 
-    console.log(username);
+    // console.log(token); 
+    // console.log(username);
 
 });
 
