@@ -64,7 +64,7 @@ const loginUser = (user, pass) => {
             localStorage.setItem('token', token);
             localStorage.setItem('username', user);
 
-            showMessageAndClear("Login Successful", "http://localhost:5015/Home/index.html");
+            showMessageAndClear("Login Successful...redirecting", "http://localhost:5015/Home/index.html");
         
         } else if(token == null && result.success == false){
             showMessageAndClear(result.message, null);
@@ -78,6 +78,70 @@ const loginUser = (user, pass) => {
         return error;
     });
 };
+
+const registerUser = (user, pass, email) => {
+    let requestBody = {
+        "username": user,
+        "password": pass,
+        "email": email
+    };
+    let fetchResult = fetch('http://localhost:5015/Auth/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'accept': 'text/plain'
+        },
+        body: JSON.stringify(requestBody)
+
+    }).then(response => {
+        return response.json();
+    }).then(result => {
+        console.log(result);
+        let token = result.data;
+        
+        if(token != null && result.success == true){
+            localStorage.setItem('token', token);
+            localStorage.setItem('username', user);
+
+            showMessageAndClear("Registration Successful...redirecting", "http://localhost:5015/Home/index.html");
+        
+        } else if(token == null && result.success == false){
+            showMessageAndClear(result.message, null);
+            return result;
+        }
+
+        return result;
+    }).catch(error => {
+        console.log("A non-app error occured. the details are: \n");
+        console.log(error);
+        return error;
+    });
+};
+
+signUpForm.addEventListener('submit', (e) =>{
+    console.log("signUpForm submitted");
+    e.preventDefault();
+    let signUpUser = document.getElementById('signUpUser').value;
+    let signUpPass = document.getElementById('signUpPass').value;
+    let signUpPassRepeat = document.getElementById('signUpPassRepeat').value;
+    let signUpEmail = document.getElementById('signUpEMail').value;
+    let isNotBlank = false;
+    
+    if(!signUpUser || !signUpPass || !signUpPassRepeat || !signUpEmail){
+        showMessageAndClear("Please fill in all fields", null);
+        return;
+    } else if(signUpPass != signUpPassRepeat){
+        showMessageAndClear("Passwords do not match", null);
+        return;
+    } else {
+        registerUser(signUpUser, signUpPass, signUpEmail)
+    }
+
+
+
+
+
+});
 
 signInForm.addEventListener('submit', (e) => 
 {
