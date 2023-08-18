@@ -1,4 +1,4 @@
-#  JSON Web Token Authentication Exploration
+# JSON Web Token Authentication Exploration
 
 ## Description
 
@@ -22,7 +22,6 @@ functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entit
 * Exported Sample Postman Collection to repository
 * Created Simple Web Pages to illustrate access to API
 
-
 ## TODOs
 
 * update documentation
@@ -37,6 +36,10 @@ functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entit
 * (Mac Only) Docker Container to setup MS SQL Server
 * (Mac Only) Azure Data Studio
 
+## Schema
+
+![Simple DB Schema](./db/Users-Characters-Schema.png "Simple DB Schema")
+
 ## Notes
 
 Each feature that was built-out has its own branch and is functionally complete in each branch.
@@ -44,6 +47,7 @@ You can view the specific commits in the log for each branch to see the changes 
 
 ## Nice-To-Haves
 
+* add an intermediate node middleware to act as a bastion to API access
 * refactor characters to employees
 * Add CRUD functionality to manage characters
 * Create seeders (instead of MS SQL backup)
