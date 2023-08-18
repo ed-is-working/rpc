@@ -45,8 +45,8 @@ builder.Services.AddScoped<ICharacterService, CharacterService>();
 // Add the AuthRepository to the container
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
-// Add authentication scheme to secure web services
-// install Microsoft.AspNetCore.Authentication.JwtBearer
+// 3. Add authentication scheme to secure web services
+// by install Microsoft.AspNetCore.Authentication.JwtBearer
 // ! null forgiving operator (removes warning, its baked in!)
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options => {
@@ -71,8 +71,8 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
+// added to ensure that the app is using authentication
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
