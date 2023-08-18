@@ -36,6 +36,28 @@ functionality using JSONWeb Tokens with .NET 7,Exploring Web APIs, and the Entit
 * (Mac Only) Docker Container to setup MS SQL Server
 * (Mac Only) Azure Data Studio
 
+## (WIP) Setup
+
+1. Install MS SQL Server.
+   1. Windows Users can use Express or Developer Editions
+   2. Mac Users can set up MS SQL Server in a docker container.
+
+useful resources:
+
+* [Development with MS SQL Server 2022 inside Docker containers - Mac](https://devblogs.microsoft.com/azure-sql/development-with-sql-in-containers-on-macos/)
+* [How to connect MS SQL Server Docker Container and Azure Data Studio - Mac](https://www.freecodecamp.org/news/cjn-how-to-connect-your-microsoft-sql-server-docker-container-with-azure-data-studio/)
+* [QuickStart: Run SQL Server Linux Container Images with Docker](https://learn.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-ver16&pivots=cs1-bash)
+* [SQL Server Installation Guide - Windows](https://learn.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16)
+
+2. Install a GUI to manage your MS SQL Server
+   1. Windows Users can use SQL Server Management Studio
+   2. Mac Users can use Azure Data Studio
+
+useful resources
+
+* [Download SQL Server Management Studio - Windows](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
+* [Download Azure Data Studio - Mac](https://learn.microsoft.com/en-us/sql/azure-data-studio/?view)
+
 ## Schema
 
 ![Simple DB Schema](./db/Users-Characters-Schema.png "Simple DB Schema")
