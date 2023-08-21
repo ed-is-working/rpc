@@ -58,6 +58,24 @@ useful resources
 * [Download SQL Server Management Studio - Windows](https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms)
 * [Download Azure Data Studio - Mac](https://learn.microsoft.com/en-us/sql/azure-data-studio/?view)
 
+3. Install the Microsoft .NET CLI that is appropriate for your OS
+   1. The [.NET CLI](https://dotnet.microsoft.com/en-us/download) comes with the .NET SDK
+
+4. Once the .NET CLI is installed, you can proceed to install the following NuGET packages from <https://www.nuget.org>
+   1. [DependencyInjection Support](https://www.nuget.org/packages/AutoMapper.Extensions.Microsoft.DependencyInjection)
+   2. [Bearer Token Support](Microsoft.AspNetCore.Authentication.JwtBearer)
+   3. [MS Open API](https://www.nuget.org/packages/Microsoft.AspNetCore.OpenApi)
+   4. [MS Static API](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles)
+   5. [MS Entity Framework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
+   6. [MS Shared Design Time Components for Entity Framework Core Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design)
+   7. [Microsoft SQL Server database provider for Entity Framework Core](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer)
+   8. [Swagger Tools for documenting APIs built on ASP.NET Core](https://www.nuget.org/packages/Swashbuckle.AspNetCore)
+   9. [Additional Filters for Swashbuckle](https://www.nuget.org/packages/Swashbuckle.AspNetCore.Filters)
+
+5. Restore the copy of the MS SQL database found as a zip file in the db folder of this repo. (or recreate it using the attached schema image found with this README)
+6. Once the DB has been restored, open the project workspace containing all the files and folders in this repo in an IDE such as JetBrains Rider, Visual Studio or Visual Studio Code.
+7. Make sure to adjust the connection string found in appsettings.json to appropriately connect to your application from within the project. 
+
 ## Schema
 
 ![Simple DB Schema](./db/Users-Characters-Schema.png "Simple DB Schema")
